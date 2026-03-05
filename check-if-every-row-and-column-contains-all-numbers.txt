@@ -1,0 +1,40 @@
+class Solution {
+    public boolean checkValid(int[][] matrix) {
+        final int numberOfRows=matrix.length;
+
+        //Check each row for validity
+        for(int row=0;row<numberOfRows;row++){
+            HashSet<Integer> rowValues = new HashSet<>();
+            for(int column=0;column<numberOfRows;column++){
+                boolean nonExisting=rowValues.add(matrix[row][column]);
+
+                if(!nonExisting){
+                    //Value repated on adding to hashmap
+                    return false;
+                }
+            }
+            //If not all values were added
+            if(rowValues.size()!=numberOfRows){
+                return false;
+            }
+        }
+
+        //Check each column for validity
+        for(int column=0;column<numberOfRows;column++){
+            HashSet<Integer> columnValues = new HashSet<>();
+            for(int row=0;row<numberOfRows;row++){
+                boolean nonExisting=columnValues.add(matrix[row][column]);
+
+                if(!nonExisting){
+                    //Value repated on adding to hashmap
+                    return false;
+                }
+            }
+            //If not all values were added
+            if(columnValues.size()!=numberOfRows){
+                return false;
+            }
+        }
+        return true;
+    }
+}
